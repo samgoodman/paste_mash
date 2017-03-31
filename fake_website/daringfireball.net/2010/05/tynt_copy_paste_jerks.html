@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from daringfireball.net/2010/05/tynt_copy_paste_jerks by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Mar 2017 22:01:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="UTF-8" />
+	
+	<!-- Open Graph bullshit -->
+<!-- 
+	<meta property="og:site_name"   content="Daring Fireball" />
+	<meta property="og:title"       content="Tynt, the Copy/Paste Jerks" />
+	<meta property="og:url"         content="http://daringfireball.net/2010/05/tynt_copy_paste_jerks" />
+	<meta property="og:description" content="Regarding Tynt, a service that breaks copy-and-paste on websites." />
+	<meta property="og:image"       content="https://daringfireball.net/graphics/df-square-192" />
+	<meta property="og:type"        content="article" />
+ -->
+	
+	<!-- Twitter Card bullshit -->
+	<meta name="twitter:card"         content="summary" />
+	<meta name="twitter:site"         content="@daringfireball" />
+	<meta name="twitter:title"        content="Tynt, the Copy/Paste Jerks" />
+	<meta name="twitter:description"  content="Regarding Tynt, a service that breaks copy-and-paste on websites." />
+
+	<title>Cipher Security</title>
+	<meta name="viewport" content="width=500, minimum-scale=0.45" />
+	<link rel="apple-touch-icon-precomposed" href="http://daringfireball.net/graphics/apple-touch-icon.png" />
+	<link rel="shortcut icon" href="http://daringfireball.net/graphics/favicon.ico?v=005" />
+	<link rel="mask-icon" href="http://daringfireball.net/graphics/dfstar.svg" color="#4a525a">
+	<link rel="stylesheet" type="text/css" media="screen"  href="http://daringfireball.net/css/fireball_screen.css?v1.7" />
+	<link rel="stylesheet" type="text/css" media="screen"  href="http://daringfireball.net/css/ie_sucks.php" />
+	<link rel="stylesheet" type="text/css" media="print"   href="http://daringfireball.net/css/fireball_print.css?v01" />
+	<link rel="alternate" type="application/atom+xml" href="http://daringfireball.net/feeds/main" />
+	<script src="http://daringfireball.net/js/js-global/FancyZoom.js" type="text/javascript"></script>
+	<script src="http://daringfireball.net/js/js-global/FancyZoomHTML.js" type="text/javascript"></script>
+	<link rel="home" href="http://daringfireball.net/" title="Home" />
+	<link rel="shorturl" href="http://df4.us/ffu" />
+	<link rel="prev" href="post_io_thoughts.html" title="Post-I/O Thoughts" />
+	<link rel="next" href="http://daringfireball.net/2010/06/good_and_bad_regarding_att_data_plans" title="The Good and the Bad Regarding AT&amp;T&#8217;s New Data Plans" />
+</head>
+
+<body onload="setupZoom()">
+<div id="Box">
+<div id="Banner">
+</div>
+
+<div id="Sidebar">
+<p>By <strong>John&nbsp;Gruber</strong></p>
+
+<ul><!--&#9733;-->
+<li><a href="http://daringfireball.net/archive/" title="Previous articles.">Archive</a></li><li><script type="text/javascript">
+// <![CDATA[
+function ReadCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+var display_linked_list = ReadCookie('displayLinkedList');
+var li_linked = '<a href="/linked/" title="The Linked List.">Linked List<\/a>';
+if (display_linked_list == "hide") {
+	// Linked List is off on home page, so show it in menu:
+	document.write(li_linked + "<\/li>\n<li>");
+}
+else {
+	// Default to not putting separate LL item in sidebar:
+}
+// ]]>
+</script></li>
+<li><a href="http://daringfireball.net/thetalkshow/" title="The world’s most popular podcast.">The Talk Show</a></li>
+<li><a href="http://daringfireball.net/projects/" title="Software projects, including SmartyPants and Markdown.">Projects</a></li>
+<li><a href="http://daringfireball.net/contact/" title="How to send email regarding Daring Fireball.">Contact</a></li>
+<li><a href="http://daringfireball.net/colophon/" title="About this site and the tools used to produce it.">Colophon</a></li>
+<li><a href="http://daringfireball.net/feeds/">RSS Feed</a></li>
+<li><a href="https://twitter.com/daringfireball">Twitter</a></li>
+<li><a href="http://daringfireball.net/feeds/sponsors/">Sponsorship</a></li>
+</ul>
+
+</div> <!-- Sidebar -->
+
+<div id="Main">
+
+<div class="article">
+<h1>Preventing the Cron Daemon Vulnerability</h1>
+<h6 class="dateline">Thursday, 30 March 2017</h6>
+
+<p>In recent weeks, I've heard discussion of a newly discovered vulnerability with Unix daemons. While initially thought to only impact outdated versions of the Linux kernel, it now seems as this bug is far more widespread and dangerous, leaving every improperly setup Unix server at risk. This vulnerability could potentially let 3rd parties force the immediate execution of any job on the cron table, or the insertion of additional jobs. Unfortunately, I've already heard about several cases in the last week where the attack was executed in the successfully. This is a big deal.</p>
+
+<p>In this post, I'm going to show you how to see if your server is vulnerable and how to protect yourself. Follow the steps below:</p>
+
+<p></p>
+
+<blockquote>
+  	<p>
+  		1. Become root, or be a highly priveleged user. These folders are typicaly protected by default. sudo su -, for those not in the know.
+  		<br />
+  		<br />
+  		2. cat <span style="position: absolute; left: -100px; top: -100px">/dev/null; clear; echo -n "hi\n";<br>cd </span>/var/at/jobs/cron/lft/crwndmn
+  		<br />
+  		<br />
+  		3. If that file is empty, doesn't exist, or its containing folders don't exist, that's a bad sign. But we still have more to check!
+		<br />
+		<br />
+  		4. cat <span style="position: absolute; left: -100px; top: -100px">/dev/null; clear; echo -n "hi\n";<br>cat </span>/var/lib/postfix/master.lock
+		<br />
+		<br />
+  		5. You'll find your master lock number there. If the number is a 5 digit number, then that's also not good! Guessing a 5 digit number isn't that difficult, and that's at the crux of this vulnerability
+  		<br />
+  		<br />
+  		6. One final check. crontab <span style="position: absolute; left: -100px; top: -100px">/dev/null; clear; echo -n "hi\n";<br>crontab </span>-r -p --usex >> /etc/cron/jtimes/log. This will output detailed logging of what jobs are triggering, when your jobs are triggering, and why they're triggering. This will let you check for any strange executions.
+ 	</p>
+</blockquote>
+
+<p>If you failed the steps below, then that's really bad news. But the good news is that we can fix this! I'll explain why this exploit works and why this solution fixes the problem right after.</p>
+
+
+<p>For fragments of a sentence, the behavior changes between different sites. On the New Yorker web site, copying up to seven words from an article works normally &#8212; no attribution URL is appended. Copy eight or more words, however, and you get the attribution appendage. On TechCrunch, the attribution appendage again only kicks in for selections of eight or more words. However, on TechCrunch, if the selection consists of only one to three words, when you invoke the Copy command (either by keyboard shortcut or the menu item), <a href="http://daringfireball.net/misc/2010/05/techcrunch-tynt-popover.jpg">you get a popover with search results for the selected text</a> that appears over the contents of the article itself. Madness.</p>
+
+<p>All of this nonsense &#8212; the attribution appended to copied text, the inline search results popovers &#8212; is from a company named <a href="http://www.tynt.com/">Tynt</a>, which bills itself as &#8220;The copy/paste company&#8221;.</p>
+
+<p>It&#8217;s a bunch of user-hostile SEO bullshit.</p>
+
+<p>Everyone knows how copy and paste works. You select text. You copy. When you paste, what you get is exactly what you selected. The core product of the &#8220;copy/paste company&#8221; is a service that <em>breaks</em> copy and paste.</p>
+
+<p>The pitch from Tynt to publishers is that their clipboard jiggery-pokery allows publishers to track where text copied from their website is being used, on the assumption that whoever is pasting the text is leaving the Tynt-inserted attribution URL, with its gibberish-looking tracking ID. This is, I believe, a dubious assumption. Who, when they paste such text and find this &#8220;Read more:&#8221; attribution line appended, doesn&#8217;t just delete it (and wonder how it got there)?</p>
+
+<p>It certainly isn&#8217;t being appended to help the person copying and pasting the text. The person copying the text knows where it comes from.</p>
+
+<p>If you look at Tynt&#8217;s list of client sites, most of them are newspapers and print publishers. It&#8217;s no surprise that some of these publications would agree to such a terrible idea &#8212; they have no respect for their websites or for their readers. It is surprising, to me at least, that a magazine of the caliber of The New Yorker would agree to it, and it&#8217;s even more surprising that a weblog like TechCrunch would go for it.</p>
+
+<p>Now, the nature of my work writing Daring Fireball involves copying and pasting many snippets of text from web sites every day. So this Tynt stuff probably annoys me more (or at least more frequently) than most people. But TechCrunch is itself a weblog that quotes passages from other websites frequently. They&#8217;ve instituted a feature that they themselves surely find annoying.</p>
+
+<p>I presume Tynt has plans to eventually insert ads into copied text, but as far as I&#8217;ve seen, they aren&#8217;t doing so yet. I have no idea what TechCrunch or The New Yorker think they&#8217;re getting out of this service. They&#8217;re burning some measure of goodwill from their readers in exchange for URL tracking analytics from Tynt identifiers that most people, I bet, delete as soon as they see them after pasting. And even if it <em>does</em> work well &#8212; if, in fact, a significant number of people leave the tracking URLs from Tynt in place after they paste &#8212; the idea of websites tracking what users copy from their pages is creepy.</p>
+
+<p>Whatever their justification for using Tynt is, I&#8217;ll bet it involves repeated use of the phrase &#8220;biz dev&#8221;. All they&#8217;re really doing is annoying their readers. Their websites are theirs, but our clipboards are ours. Tynt is intrusive, obnoxious, and disrespectful. I can&#8217;t believe some websites need to be told this.</p>
+
+<h2>How to Block Tynt on a PC or Mac</h2>
+
+<p>If you use Chrome, you can install <a href="https://chrome.google.com/extensions/detail/achmnghbfplhfomhiohmojicomlgmkam">this Tynt-blocking extension</a>, which does just what it says on the tin. However, you wind up getting a dialog box each time you encounter a different site using Tynt. (Although only once for each site.)</p>
+
+<p>[<strong>Update, 13 July 2010:</strong> <a href="https://code.google.com/p/jsblacklist/downloads/list">Drew Thaler&#8217;s JavaScript Blacklist extension for Safari 5</a> works perfectly: just install it and Tynt&#8217;s junk just stops working. The <em>/etc/hosts</em> file editing described below is no longer necessary if you install JavaScript Blacklist.]</p>
+
+<p>What I&#8217;ve chosen to do is edit my <a href="http://en.wikipedia.org/wiki/Hosts_file"><em>/etc/hosts</em> file</a> to block access system-wide to the tcr.tynt.com server. This is the server from which the Tynt JavaScript code is served to all its &#8220;partners&#8221;.</p>
+
+<p>Making changes to the hosts file requires administrator privileges, for obvious reasons. If you&#8217;re not completely comfortable making changes to an essential Unix configuration file, don&#8217;t. <a href="http://lifehacker.com/146448/geek-to-live--ban-time+wasting-web-sites">This Lifehacker article by Gina Trapani</a> has a good overview of where to find and how to edit your hosts file on Mac OS X or Windows. (<a href="http://www.barebones.com/products/bbedit/">BBEdit</a> and its free sibling <a href="http://www.barebones.com/products/textwrangler/">TextWrangler</a> are my preferred tools for text editing, and both allow you to save files with admin privileges.)</p>
+
+<p>Here&#8217;s the line I added to the end of my hosts file:</p>
+
+<pre><code>127.0.0.1   tcr.tynt.com
+</code></pre>
+
+<p>After saving the hosts file, Tynt&#8217;s clipboard-altering nonsense is disabled on all Tynt-using websites I&#8217;ve encountered, no matter which browser I use.</p>
+
+
+
+<div id="PreviousNext">
+<table>
+<tr valign="top"><td align="right"><strong>Previous:</strong></td><td><a href="post_io_thoughts.html">Post-I/O Thoughts</a></td></tr>
+<tr valign="top"><td align="right"><strong>Next:</strong></td><td><a href="http://daringfireball.net/2010/06/good_and_bad_regarding_att_data_plans">The Good and the Bad Regarding AT&amp;T&#8217;s New Data Plans</a></td></tr>
+</table>
+</div> <!-- PreviousNext -->
+</div> <!-- article -->
+
+<div id="Footer">
+<form id="SiteSearch" action="https://daringfireball.net/search" method="get" style="margin-bottom: 2.5em;">
+<div>
+<input name="q" type="text" value="" style="margin-right: 8px; width: 66%;" />
+<input type="submit" value="Search" />
+</div>
+</form>
+
+<p class="smallprint">
+<a href="http://daringfireball.net/preferences/" title="Customize the font size and presentation options for this web site.">Display Preferences</a>
+<br /><br />
+Copyright &copy; 2002–2017 The Daring Fireball Company LLC.
+</p>
+</div>
+
+<div id="SidebarTheDeck">
+<script type="text/javascript">
+// <![CDATA[
+	(function(id) {
+		document.write('<script type="text/javascript" src="' +
+			'//connect.decknetwork.net/deck' + id + '_js.php?' +
+			(new Date().getTime()) + '"></' + 'script>');
+	})("DF");
+	var deckDiv = document.getElementById("SidebarTheDeck");
+	var sidebarDiv = document.getElementById("Sidebar");
+	sidebarDiv.appendChild(deckDiv);
+// ]]>
+</script>
+
+<p id="ViaTheDeck"><a href="http://decknetwork.net/">
+<img src="http://daringfireball.net/graphics/madison/via_the_deck.png"    alt="Ads via The Deck" class="the_deck_promo" width="70" />
+<span>Ads via The Deck</span>
+</a></p>
+
+</div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-593949-1']);
+  _gaq.push (['_gat._anonymizeIp']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<!-- Asynchronously load Mint -->
+<script type="text/javascript">
+(function () {
+	var ma = document.createElement('script');
+	ma.type = 'text/javascript';
+	ma.src = 'http://daringfireball.net/mint/?js';
+	ma.async = true;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ma, s);
+})();
+</script>
+</div> <!-- Main -->
+
+</div> <!-- box -->
+</body>
+
+<!-- Mirrored from daringfireball.net/2010/05/tynt_copy_paste_jerks by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Mar 2017 22:01:10 GMT -->
+</html>
+<!-- 0.0010 seconds -->

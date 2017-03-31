@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from daringfireball.net/2010/05/flash_almost_as_open_as_office by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Mar 2017 22:01:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="UTF-8" />
+	
+	<!-- Open Graph bullshit -->
+<!-- 
+	<meta property="og:site_name"   content="Daring Fireball" />
+	<meta property="og:title"       content="Adobe Flash: Almost as Open as Microsoft Office" />
+	<meta property="og:url"         content="http://daringfireball.net/2010/05/flash_almost_as_open_as_office" />
+	<meta property="og:description" content="Let’s concede that Flash is “open” because Adobe has published the partial SWF 10 file format spec." />
+	<meta property="og:image"       content="https://daringfireball.net/graphics/df-square-192" />
+	<meta property="og:type"        content="article" />
+ -->
+	
+	<!-- Twitter Card bullshit -->
+	<meta name="twitter:card"         content="summary" />
+	<meta name="twitter:site"         content="@daringfireball" />
+	<meta name="twitter:title"        content="Adobe Flash: Almost as Open as Microsoft Office" />
+	<meta name="twitter:description"  content="Let’s concede that Flash is “open” because Adobe has published the partial SWF 10 file format spec." />
+
+	<title>Daring Fireball: Adobe Flash: Almost as Open as Microsoft Office</title>
+	<meta name="viewport" content="width=500, minimum-scale=0.45" />
+	<link rel="apple-touch-icon-precomposed" href="http://daringfireball.net/graphics/apple-touch-icon.png" />
+	<link rel="shortcut icon" href="http://daringfireball.net/graphics/favicon.ico?v=005" />
+	<link rel="mask-icon" href="http://daringfireball.net/graphics/dfstar.svg" color="#4a525a">
+	<link rel="stylesheet" type="text/css" media="screen"  href="http://daringfireball.net/css/fireball_screen.css?v1.7" />
+	<link rel="stylesheet" type="text/css" media="screen"  href="http://daringfireball.net/css/ie_sucks.php" />
+	<link rel="stylesheet" type="text/css" media="print"   href="http://daringfireball.net/css/fireball_print.css?v01" />
+	<link rel="alternate" type="application/atom+xml" href="http://daringfireball.net/feeds/main" />
+	<script src="http://daringfireball.net/js/js-global/FancyZoom.js" type="text/javascript"></script>
+	<script src="http://daringfireball.net/js/js-global/FancyZoomHTML.js" type="text/javascript"></script>
+	<link rel="home" href="http://daringfireball.net/" title="Home" />
+	<link rel="shorturl" href="http://df4.us/fbs" />
+	<link rel="prev" href="jesus_diaz.html" title="Where in the World Is Jesus Diaz?" />
+	<link rel="next" href="paczkowski_geschke.html" title="John Paczkowski&#8217;s Interview With Adobe Co-Founder Chuck Geschke" />
+</head>
+
+<body onload="setupZoom()">
+<div id="Box">
+<div id="Banner"><a href="http://daringfireball.net/" title="Daring Fireball: Home"><img src="http://daringfireball.net/graphics/logos/" alt="Daring Fireball" height="56" /></a></div><div id="Sidebar">
+<p>By <strong>John&nbsp;Gruber</strong></p>
+
+<ul><!--&#9733;-->
+<li><a href="http://daringfireball.net/archive/" title="Previous articles.">Archive</a></li><li><script type="text/javascript">
+// <![CDATA[
+function ReadCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+var display_linked_list = ReadCookie('displayLinkedList');
+var li_linked = '<a href="/linked/" title="The Linked List.">Linked List<\/a>';
+if (display_linked_list == "hide") {
+	// Linked List is off on home page, so show it in menu:
+	document.write(li_linked + "<\/li>\n<li>");
+}
+else {
+	// Default to not putting separate LL item in sidebar:
+}
+// ]]>
+</script></li>
+<li><a href="http://daringfireball.net/thetalkshow/" title="The world’s most popular podcast.">The Talk Show</a></li>
+<li><a href="http://daringfireball.net/projects/" title="Software projects, including SmartyPants and Markdown.">Projects</a></li>
+<li><a href="http://daringfireball.net/contact/" title="How to send email regarding Daring Fireball.">Contact</a></li>
+<li><a href="http://daringfireball.net/colophon/" title="About this site and the tools used to produce it.">Colophon</a></li>
+<li><a href="http://daringfireball.net/feeds/">RSS Feed</a></li>
+<li><a href="https://twitter.com/daringfireball">Twitter</a></li>
+<li><a href="http://daringfireball.net/feeds/sponsors/">Sponsorship</a></li>
+</ul>
+
+</div> <!-- Sidebar -->
+
+<div id="Main">
+
+<div class="article">
+<h1>Adobe Flash: Almost as Open as Microsoft&#160;Office</h1>
+<h6 class="dateline">Friday, 14 May 2010</h6>
+
+<p>&#8220;Open&#8221; is one of those terms that means a lot of different things to different people. Most should be able to agree, though, that open-vs.-closed is a continuum &#8212; shades of gray, not just black and white. A light enough shade of gray is &#8220;open&#8221;, dark enough is &#8220;closed&#8221;. The arguments are over where those thresholds lie.</p>
+
+<p>I, for example, would argue that HTML5 is open, and that Flash is not. HTML5 is open, to my eyes, because no one vendor defines or controls either its specification or its numerous implementations. The specification is being written and decided upon by consensus by two standards groups, <a href="http://www.whatwg.org/">WHATWG</a> and <a href="http://dev.w3.org/html5/spec/Overview.html">the W3C</a>. There are critics of the HTML5 spec, as well as critics of the process used to create it and the power vested in WHATWG editor Ian Hickson. But you can&#8217;t please everybody. The bottom line is that all five of the top web browser makers &#8212; Microsoft, Mozilla, Google, Apple, and Opera &#8212; agree that HTML5 is an open spec. There&#8217;s not much you can get those five to agree upon.</p>
+
+<p>Adobe&#8217;s argument that Flash is open largely hinges upon their having published a <a href="http://www.adobe.com/devnet/swf/">specification for the SWF file format</a>, and that in May 2008, Adobe dropped the Macromedia-era <a href="http://en.wikipedia.org/wiki/SWF#Licensing">licensing restriction</a> forbidding the creation of software to play SWF content. The existence of this spec certainly makes SWF more open than if the spec did not exist. But open enough to qualify Flash as an open technology?</p>
+
+<p>One argument against that would be that even a complete working implementation of everything in Adobe&#8217;s published spec would leave you with a Flash player that doesn&#8217;t work with much popular Flash content. <a href="http://mashable.com/2010/05/13/adobe-apple-open/">As Christina Warren wrote yesterday at Mashable</a>:</p>
+
+<blockquote>
+  <p>While Adobe can argue that elements of Flash (through its Open
+Screen Project) are indeed open source, Flash itself is not an
+open standard. While Adobe cites some open source implementations
+in its “<a href="http://www.adobe.com/choice/flash.html">truth about Flash</a>”, like Gnash &#8212; the open source
+Flash alternative &#8212; those same runtimes cannot achieve parity
+with the closed-source alternatives because parts of Flash
+associated with DRM and other content controls aren’t available.
+Just ask <a href="http://www.theregister.co.uk/2010/02/24/iplayer_xbmc_adobe_swf_verification/">XBMC users in the UK who can’t play BBC iPlayer</a> content
+anymore.</p>
+</blockquote>
+
+<p>I believe the same is true for any DRM-protected Flash media, such as Hulu. It&#8217;s not just that non-Adobe implementations <em>don&#8217;t</em> work, but that they <em>can&#8217;t</em>.</p>
+
+<p>But let&#8217;s put that aside. I often find it a useful technique to concede a point for the sake of argument and see where that leads. So let&#8217;s concede that Flash is &#8220;open&#8221; because Adobe has published the partial SWF 10 file format spec.</p>
+
+<p>Microsoft published the <a href="http://en.wikipedia.org/wiki/Office_Open_XML">OOXML</a> file format specs for its Office apps. And not only did they publish the specs, <a href="http://www.tbray.org/ongoing/When/200x/2008/06/30/ISO-Says-Everything-is-OK">they submitted them to a widely-respected industry standards organization</a>, and now <a href="http://www.ip-watch.org/weblog/2008/04/01/office-open-xml-officially-approved-as-international-standard/">they&#8217;re ISO standards</a>.</p>
+
+<p>Adobe&#8217;s Flash specs have <a href="http://digitaldaily.allthingsd.com/20100514/chuck-geschke-on-adobe-flash-apple/">never been submitted to a standards body</a>, let alone accepted, thus, anyone who argues that Adobe Flash is open would agree that Microsoft Office is even more open.</p>
+
+
+
+<div id="PreviousNext">
+<table>
+<tr valign="top"><td align="right"><strong>Previous:</strong></td><td><a href="jesus_diaz.html">Where in the World Is Jesus Diaz?</a></td></tr>
+<tr valign="top"><td align="right"><strong>Next:</strong></td><td><a href="paczkowski_geschke.html">John Paczkowski&#8217;s Interview With Adobe Co-Founder Chuck Geschke</a></td></tr>
+</table>
+</div> <!-- PreviousNext -->
+</div> <!-- article -->
+
+<div id="Footer">
+<form id="SiteSearch" action="https://daringfireball.net/search" method="get" style="margin-bottom: 2.5em;">
+<div>
+<input name="q" type="text" value="" style="margin-right: 8px; width: 66%;" />
+<input type="submit" value="Search" />
+</div>
+</form>
+
+<p class="smallprint">
+<a href="http://daringfireball.net/preferences/" title="Customize the font size and presentation options for this web site.">Display Preferences</a>
+<br /><br />
+Copyright &copy; 2002–2017 The Daring Fireball Company LLC.
+</p>
+</div>
+
+<div id="SidebarTheDeck">
+<script type="text/javascript">
+// <![CDATA[
+	(function(id) {
+		document.write('<script type="text/javascript" src="' +
+			'//connect.decknetwork.net/deck' + id + '_js.php?' +
+			(new Date().getTime()) + '"></' + 'script>');
+	})("DF");
+	var deckDiv = document.getElementById("SidebarTheDeck");
+	var sidebarDiv = document.getElementById("Sidebar");
+	sidebarDiv.appendChild(deckDiv);
+// ]]>
+</script>
+
+<p id="ViaTheDeck"><a href="http://decknetwork.net/">
+<img src="http://daringfireball.net/graphics/madison/via_the_deck.png"    alt="Ads via The Deck" class="the_deck_promo" width="70" />
+<span>Ads via The Deck</span>
+</a></p>
+
+</div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-593949-1']);
+  _gaq.push (['_gat._anonymizeIp']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<!-- Asynchronously load Mint -->
+<script type="text/javascript">
+(function () {
+	var ma = document.createElement('script');
+	ma.type = 'text/javascript';
+	ma.src = 'http://daringfireball.net/mint/?js';
+	ma.async = true;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ma, s);
+})();
+</script>
+</div> <!-- Main -->
+
+</div> <!-- box -->
+</body>
+
+<!-- Mirrored from daringfireball.net/2010/05/flash_almost_as_open_as_office by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Mar 2017 22:01:12 GMT -->
+</html>
+<!-- 0.0005 seconds -->
